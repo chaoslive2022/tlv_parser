@@ -1,14 +1,15 @@
 # Description
-BER Tag Length Value parser
+BER TV parser
 
 ## Version
 v0.1.0.0
 
 ## Status
-Under elaboration and construction
+Under elaboration and construction...
 
 ## Characteristic
-C implementation to target embedded platforms
+- C implementation to target embedded platforms
+- Google test unit supported
 
 # Usage
 
