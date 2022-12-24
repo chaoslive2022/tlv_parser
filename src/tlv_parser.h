@@ -26,8 +26,12 @@
  */
 
 
-#define TLV_PARSER_NO_ERROR             0
-#define TLV_PARSER_INVALID_PARAM_IN     1
+#define TLV_PARSER_NO_ERROR                 0
+#define TLV_PARSER_INVALID_PARAM_IN         1
+#define TLV_PARSER_NOT_INITIALIZED          2
+#define TLV_PARSER_INVALID_STREAM           3
+#define TLV_PARSER_INVALID_STREAM_LENGTH    4
+#define TLV_PARSER_INVALID_CURRENT          5
 
 /** \defgroup Structure Data Structure
  * @{
@@ -45,13 +49,13 @@
  */
 typedef struct
 {
-    uint8_t *m_pTag;         /** pointer to the TAG */
-    uint8_t m_tag_length;    /** number of bytes encoding TAG - update to 4 */
-    uint32_t m_tag_value;      /** TAG's value*/
-    uint8_t *m_pLength;      /** pointer to the LENGTH */
+    uint8_t *m_tag; /** pointer to the TAG */
+    uint8_t m_tag_length; /** number of bytes encoding TAG - update to 4 */
+    uint32_t m_tag_value; /** TAG's value*/
+    uint8_t *m_length; /** pointer to the LENGTH */
     uint8_t m_length_length; /** number of bytes encoding LENGTH - update to 4 */
     uint16_t m_length_value; /* LENGTH's value*/
-    uint8_t *m_pData;        /** VALUE */
+    uint8_t *m_data; /** VALUE */
 } tlv_parser_data_object;
 
 /**
@@ -60,45 +64,45 @@ typedef struct
  */
 typedef struct
 {
-    uint8_t *m_pStreamStart;        /** */
-    uint8_t *m_pStreamCurrent;      /** */
-    uint16_t m_length;                /** */
-    tlv_parser_data_object m_pDataObject; /** */
+    uint8_t *m_stream_start; /** */
+    uint16_t m_length; /** */
+    uint8_t *m_stream_current; /** */
+    tlv_parser_data_object m_data_object; /** */
 } tlv_parser_iterator;
 
 /**
- * @brief creates and initializes an iterator from a TLV data objects stream
+ * @brief initializes an iterator from a TLV data objects stream
  * @param[in] data stream containing TLV data objects
  * @param[in] lengh length of the stream
  * @param[inout] iterator iterator's address provided by calling module
  * @return error code
  */
-int tlv_parser_create(const uint8_t *data, uint16_t length, tlv_parser_iterator *iterator);
+uint16_t tlv_parser_initialize(const uint8_t *data, uint16_t length, tlv_parser_iterator *iterator);
 
 /**
- * @brief
+ * @brief sets an iterator to enable stream parsing
  * @param[inout] iterator iterator's address provided by calling module
  * * @return error code
  */
-int tlv_parser_first(tlv_parser_iterator *iterator);
+uint16_t tlv_parser_first(tlv_parser_iterator *iterator);
 
 /**
  * @brief
  * @param[in] iterator iterator's address provided by calling module
  * @return error code
  */
-int tlv_parser_has_next(const tlv_parser_iterator *iterator);
+uint8_t tlv_parser_has_next(const tlv_parser_iterator *iterator);
 
 /**
  * @brief moves iterator to next BER TLV data object
  * @param[inout] iterator iterator's address provided by calling module
  * @return error code
  */
-int tlv_parser_next(tlv_parser_iterator *iterator);
+uint16_t tlv_parser_next(tlv_parser_iterator *iterator);
 
 /**
  * @brief sets iterator's data object to current BER TLV data object's value
  * @param[inout] iterator iterator's address provided by calling module
  * @return error code
  */
-int tlv_parser_current(tlv_parser_iterator *iterator);
+uint16_t tlv_parser_current(tlv_parser_iterator *iterator);

@@ -20,15 +20,11 @@ if(USE_GTEST)
     FetchContent_MakeAvailable(googletest)
 endif()
 
-
-option(USE_HAL "Use hardware abstraction layer module" OFF)
-
 configure_file(tlv_parser_configuration.h.in tlv_parser_configuration.h)
 
-if(USE_HAL)
-    add_subdirectory(../../hal)
-    list(APPEND EXTRA_LIBS ../../hal)
-endif()
+add_subdirectory(../../hal/src hal)
+list(APPEND EXTRA_LIBS hal)
+
 
 # add the executable
 add_executable(

@@ -3,5 +3,10 @@
 #define tlv_parser_VERSION_PATCH @tlv_parser_VERSION_PATCH@
 #define tlv_parser_VERSION_TWEAK @tlv_parser_VERSION_TWEAK@
 
+#define hal_VERSION_MAJOR @hal_VERSION_MAJOR@
+#define hal_VERSION_MINOR @hal_VERSION_MINOR@
+#define hal_VERSION_PATCH @hal_VERSION_PATCH@
+#define hal_VERSION_TWEAK @hal_VERSION_TWEAK@
+
+
 #cmakedefine USE_GTEST
-#cmakedefine USE_HAL

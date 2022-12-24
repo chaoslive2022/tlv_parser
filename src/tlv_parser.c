@@ -9,85 +9,122 @@
  * 
  */
 
-#ifdef USE_HAL
-    #include "hal/hal.h"
-#else
-    #include <string.h>
-#endif
+#include "../../hal/src/hal.h"
+#include <string.h>
 
 #include "tlv_parser.h"
 
 
-int parse_tlv()
+// Private
+uint16_t tlv_parser_parse_tlv(uint8_t *tlv, tlv_parser_data_object *data_object)
 {
     return TLV_PARSER_NO_ERROR;
 }
 
-int tlv_parser_create(const uint8_t *data, uint16_t length, tlv_parser_iterator *iterator)
+uint16_t tlv_parser_catch_error(const tlv_parser_iterator *iterator)
 {
     if(!iterator)
     {
         return TLV_PARSER_INVALID_PARAM_IN;
     }
 
-#ifdef USE_HAL
-    hal_memset(iterator,0x00,sizeof(tlv_parser_iterator));
-#else
-    memset(iterator,0x00,sizeof(tlv_parser_iterator));
-#endif
+    if(!iterator->m_stream_start || !iterator->m_length)
+    {
+        return TLV_PARSER_NOT_INITIALIZED;
+    }
 
-    iterator->m_pStreamStart = (uint8_t *)data;
+    if(!iterator->m_stream_current)
+    {
+        return TLV_PARSER_INVALID_CURRENT;
+    }
+
+    return TLV_PARSER_NO_ERROR;
+}
+
+// Public
+uint16_t tlv_parser_initialize(const uint8_t *data, uint16_t length, tlv_parser_iterator *iterator)
+{
+    if(!iterator)
+    {
+        return TLV_PARSER_INVALID_PARAM_IN;
+    }
+
+    if(!data)
+    {
+        return TLV_PARSER_INVALID_STREAM;
+    }
+
+    if(!length)
+    {
+        return TLV_PARSER_INVALID_STREAM_LENGTH;
+    }
+
+    hal_memset(iterator,0x00,sizeof(tlv_parser_iterator));
+
+    iterator->m_stream_start = (uint8_t *)data;
     iterator->m_length = length;
 
     return TLV_PARSER_NO_ERROR;
 }
 
-int tlv_parser_first(tlv_parser_iterator *iterator)
+uint16_t tlv_parser_first(tlv_parser_iterator *iterator)
 {
     if(!iterator)
     {
         return TLV_PARSER_INVALID_PARAM_IN;
     }
 
-    iterator->m_pStreamCurrent = iterator->m_pStreamStart;
+    if(!iterator->m_stream_start || !iterator->m_length)
+    {
+        return TLV_PARSER_NOT_INITIALIZED;
+    }
 
-#ifdef USE_HAL 
-    hal_memset(&iterator->m_pDataObject,0x00,sizeof(tlv_parser_data_object));
-#else
-    memset(&iterator->m_pDataObject,0x00,sizeof(tlv_parser_data_object));
-#endif
+    iterator->m_stream_current = iterator->m_stream_start;
 
    return TLV_PARSER_NO_ERROR;
 }
 
-int tlv_parser_has_next(const tlv_parser_iterator *iterator)
+uint8_t tlv_parser_has_next(const tlv_parser_iterator *iterator)
 {
-    if(!iterator)
+    uint16_t error=TLV_PARSER_NO_ERROR;
+
+    error = tlv_parser_catch_error(iterator);
+    if(error)
     {
-        return 0; // if iterator not defined then process like end reached
+        return 0; // Any error leads to false (end of stream)
     }
 
-    return iterator->m_pStreamCurrent < (iterator->m_pStreamStart + iterator->m_length);
+    return iterator->m_stream_current < (iterator->m_stream_start + iterator->m_length);
 }
 
-int tlv_parser_next(tlv_parser_iterator *iterator)
+uint16_t tlv_parser_next(tlv_parser_iterator *iterator)
 {
-    if(!iterator)
+    uint16_t error=TLV_PARSER_NO_ERROR;
+
+    error = tlv_parser_catch_error(iterator);
+    if(error)
     {
-        return TLV_PARSER_INVALID_PARAM_IN;
+        return error;
     }
 
-    return TLV_PARSER_NO_ERROR;    
-}
-
-int tlv_parser_current(tlv_parser_iterator *iterator)
-{
-    if(!iterator)
-    {
-        return TLV_PARSER_INVALID_PARAM_IN;
-    }
-
-    parse_tlv();
+    // To do
+    // Set current to next TLV
 
     return TLV_PARSER_NO_ERROR;
+}
+
+uint16_t tlv_parser_current(tlv_parser_iterator *iterator)
+{
+    uint16_t error=TLV_PARSER_NO_ERROR;
+    tlv_parser_data_object data_object;
+
+    error = tlv_parser_catch_error(iterator);
+    if(error)
+    {
+        return error;
+    }
+
+    error = tlv_parser_parse_tlv(iterator->m_stream_current, &data_object);
+
+    return error;
 }
