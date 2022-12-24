@@ -1,0 +1,41 @@
+\hypertarget{tlv__parser_8h}{}\doxysection{C\+:/\+Users/\+Olivier/1-\/\+Workspaces/\+My\+Projects/tlv\+\_\+parser/src/tlv\+\_\+parser.h File Reference}
+\label{tlv__parser_8h}\index{C:/Users/Olivier/1-\/Workspaces/MyProjects/tlv\_parser/src/tlv\_parser.h@{C:/Users/Olivier/1-\/Workspaces/MyProjects/tlv\_parser/src/tlv\_parser.h}}
+
+
+tlv\+\_\+parser meant to process a BER TLV data objects stream as per ASN-\/1 definition  
+
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtlv__parser__data__object}{tlv\+\_\+parser\+\_\+data\+\_\+object}}
+\item 
+struct \mbox{\hyperlink{structtlv__parser__iterator}{tlv\+\_\+parser\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em intializes BER TLV iterator \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group___structure_ga1aeafeae117175b94540f6a592e88689}{tlv\+\_\+parser\+\_\+create}} (const unsigned char $\ast$data, unsigned int length, \mbox{\hyperlink{structtlv__parser__iterator}{tlv\+\_\+parser\+\_\+iterator}} $\ast$iterator)
+\begin{DoxyCompactList}\small\item\em creates and initializes an iterator from a TLV data objects stream \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group___structure_ga98a1acba7e7cba3c5cf1ab85517b7d60}{tlv\+\_\+parser\+\_\+first}} (\mbox{\hyperlink{structtlv__parser__iterator}{tlv\+\_\+parser\+\_\+iterator}} $\ast$iterator)
+\item 
+int \mbox{\hyperlink{group___structure_ga28d1c6768ef475664db6fb271519eb8a}{tlv\+\_\+parser\+\_\+has\+\_\+next}} (const \mbox{\hyperlink{structtlv__parser__iterator}{tlv\+\_\+parser\+\_\+iterator}} $\ast$iterator)
+\item 
+int \mbox{\hyperlink{group___structure_gae99a2f58feb143e1d38348cceb6d4350}{tlv\+\_\+parser\+\_\+next}} (\mbox{\hyperlink{structtlv__parser__iterator}{tlv\+\_\+parser\+\_\+iterator}} $\ast$iterator)
+\begin{DoxyCompactList}\small\item\em moves iterator to next BER TLV data object \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group___structure_ga2036eb97b36fd6f1383e7ed8947ac484}{tlv\+\_\+parser\+\_\+current}} (\mbox{\hyperlink{structtlv__parser__iterator}{tlv\+\_\+parser\+\_\+iterator}} $\ast$iterator)
+\begin{DoxyCompactList}\small\item\em sets iterator\textquotesingle{}s data object to current BER TLV data object\textquotesingle{}s value \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+tlv\+\_\+parser meant to process a BER TLV data objects stream as per ASN-\/1 definition 
+
+BER TLV data object.
+
+\begin{DoxyNote}{Note}
+Hypothesis
+\begin{DoxyItemize}
+\item 4-\/byte length tag
+\item 
+\end{DoxyItemize}
+\end{DoxyNote}
