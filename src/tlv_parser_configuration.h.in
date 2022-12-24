@@ -3,5 +3,5 @@
 #define tlv_parser_VERSION_PATCH @tlv_parser_VERSION_PATCH@
 #define tlv_parser_VERSION_TWEAK @tlv_parser_VERSION_TWEAK@
 
-#cmakedefine USE_HAL
 #cmakedefine USE_GTEST
+#cmakedefine USE_HAL

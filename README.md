@@ -9,3 +9,29 @@ Under elaboration and construction
 
 ## Characteristic
 C implementation to target embedded platforms
+
+#Usage
+
+## Make
+From root directory:
+```
+cmake -DUSE_GTEST=ON -S .\src\ -B .\build\
+```
+
+## Build
+From root directory:
+```
+cmake --build .\build\
+```
+
+## Execute
+```
+cd build && ctest
+```
+
+Or
+
+```
+cd build && .\tlv_parser
+```
+

@@ -26,17 +26,35 @@ option(USE_HAL "Use hardware abstraction layer module" OFF)
 configure_file(tlv_parser_configuration.h.in tlv_parser_configuration.h)
 
 if(USE_HAL)
-    add_subdirectory(hal)
-    list(APPEND EXTRA_LIBS hal)
+    add_subdirectory(../../hal)
+    list(APPEND EXTRA_LIBS ../../hal)
 endif()
 
 # add the executable
-add_executable(tlv_parser
-                main.c
-                tlv_parser.c)
+add_executable(
+    tlv_parser
+    main.c
+    tlv_parser.c
+)
 
 target_link_libraries(tlv_parser PUBLIC ${EXTRA_LIBS})
 
-target_include_directories(tlv_parser PUBLIC
-                           "${PROJECT_BINARY_DIR}"
-                           )
+target_include_directories(
+    tlv_parser PUBLIC
+    "${PROJECT_BINARY_DIR}"
+)
+
+if(USE_GTEST)
+    enable_testing()
+
+    add_executable(
+        tlv_parser_test
+        ../test/unit_test_vector.cc
+    )
+    target_link_libraries(
+        tlv_parser_test
+        GTest::gtest_main
+    )                            
+    include(GoogleTest)
+    gtest_discover_tests(tlv_parser_test)
+endif()
