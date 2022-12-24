@@ -1,8 +1,11 @@
 # Description
 BER Tag Length Value parser
 
-# Status
+## Version
+v0.1.0.0
+
+## Status
 Under elaboration and construction
 
-# Characteristic
+## Characteristic
 C implementation to target embedded platforms

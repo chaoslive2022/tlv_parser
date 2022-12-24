@@ -20,14 +20,14 @@
 
 int parse_tlv()
 {
-    return 0;
+    return TLV_PARSER_NO_ERROR;
 }
 
-int tlv_parser_create(const unsigned char *data, unsigned int length, tlv_parser_iterator *iterator)
+int tlv_parser_create(const uint8_t *data, uint16_t length, tlv_parser_iterator *iterator)
 {
     if(!iterator)
     {
-        return 1;
+        return TLV_PARSER_INVALID_PARAM_IN;
     }
 
 #ifdef USE_HAL
@@ -36,17 +36,17 @@ int tlv_parser_create(const unsigned char *data, unsigned int length, tlv_parser
     memset(iterator,0x00,sizeof(tlv_parser_iterator));
 #endif
 
-    iterator->m_pStreamStart = (unsigned char *)data;
+    iterator->m_pStreamStart = (uint8_t *)data;
     iterator->m_length = length;
 
-    return 0;
+    return TLV_PARSER_NO_ERROR;
 }
 
 int tlv_parser_first(tlv_parser_iterator *iterator)
 {
     if(!iterator)
     {
-        return 1;
+        return TLV_PARSER_INVALID_PARAM_IN;
     }
 
     iterator->m_pStreamCurrent = iterator->m_pStreamStart;
@@ -57,7 +57,7 @@ int tlv_parser_first(tlv_parser_iterator *iterator)
     memset(&iterator->m_pDataObject,0x00,sizeof(tlv_parser_data_object));
 #endif
 
-   return 0;
+   return TLV_PARSER_NO_ERROR;
 }
 
 int tlv_parser_has_next(const tlv_parser_iterator *iterator)
@@ -74,20 +74,20 @@ int tlv_parser_next(tlv_parser_iterator *iterator)
 {
     if(!iterator)
     {
-        return 1;
+        return TLV_PARSER_INVALID_PARAM_IN;
     }
 
-    return 0;    
+    return TLV_PARSER_NO_ERROR;    
 }
 
 int tlv_parser_current(tlv_parser_iterator *iterator)
 {
     if(!iterator)
     {
-        return 1;
+        return TLV_PARSER_INVALID_PARAM_IN;
     }
 
     parse_tlv();
 
-    return 0;
+    return TLV_PARSER_NO_ERROR;
 }
