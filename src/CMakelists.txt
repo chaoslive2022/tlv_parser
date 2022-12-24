@@ -1,56 +1,18 @@
 cmake_minimum_required(VERSION 3.10)
 
 # set the project name and version
-project(tlv_parser VERSION 0.1.0.0)
+project(tlv_parser VERSION 0.0.0.0)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-option(USE_GTEST "Use google unit test module" OFF)
-
-if(USE_GTEST)
-    include(FetchContent)
-    FetchContent_Declare(
-        googleTest
-        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-    )
-
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    FetchContent_MakeAvailable(googletest)
-endif()
-
-configure_file(tlv_parser_configuration.h.in tlv_parser_configuration.h)
-
-add_subdirectory(../../hal/src hal)
-list(APPEND EXTRA_LIBS hal)
-
-
-# add the executable
-add_executable(
-    tlv_parser
-    main.c
-    tlv_parser.c
-)
-
-target_link_libraries(tlv_parser PUBLIC ${EXTRA_LIBS})
+# add the library
+add_library(
+    tlv_parser SHARED
+    tlv_parser.c)
 
 target_include_directories(
-    tlv_parser PUBLIC
-    "${PROJECT_BINARY_DIR}"
+    tlv_parser 
+    INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 )
-
-if(USE_GTEST)
-    enable_testing()
-
-    add_executable(
-        tlv_parser_test
-        ../test/unit_test_vector.cc
-    )
-    target_link_libraries(
-        tlv_parser_test
-        GTest::gtest_main
-    )                            
-    include(GoogleTest)
-    gtest_discover_tests(tlv_parser_test)
-endif()
