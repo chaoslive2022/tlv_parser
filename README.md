@@ -10,21 +10,21 @@ Under elaboration and construction
 ## Characteristic
 C implementation to target embedded platforms
 
-#Usage
+## Usage
 
-## Make
+# Make
 From root directory:
 ```
 cmake -DUSE_GTEST=ON -S .\src\ -B .\build\
 ```
 
-## Build
+# Build
 From root directory:
 ```
 cmake --build .\build\
 ```
 
-## Execute
+# Run
 ```
 cd build && ctest
 ```
