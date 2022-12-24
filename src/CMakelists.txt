@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 3.10)
+
+# set the project name and version
+project(tlv_parser VERSION 0.1)
+
+# specify the C++ standard
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+option(USE_HAL "Use hardware abstraction layer module" OFF)
+
+configure_file(tlv_parser_configuration.h.in tlv_parser_configuration.h)
+
+if(USE_HAL)
+    add_subdirectory(hal)
+    list(APPEND EXTRA_LIBS hal)
+endif()
+
+# add the executable
+add_executable(tlv_parser
+                main.c
+                tlv_parser.c)
+
+target_link_libraries(tlv_parser PUBLIC ${EXTRA_LIBS})
+
+target_include_directories(tlv_parser PUBLIC
+                           "${PROJECT_BINARY_DIR}"
+                           )

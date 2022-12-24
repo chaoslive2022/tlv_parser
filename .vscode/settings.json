@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "tlv_parser.h": "c",
+        "string.h": "c"
+    }
+}

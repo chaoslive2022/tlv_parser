@@ -1,0 +1,3 @@
+#define tlv_parser_VERSION_MAJOR @tlv_parser_VERSION_MAJOR@
+#define tlv_parser_VERSION_MINOR @tlv_parser_VERSION_MINOR@
+
