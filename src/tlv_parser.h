@@ -39,13 +39,13 @@
  */
 typedef struct
 {
-    unsigned char* m_pTag; /** pointer to the TAG */
+    unsigned char *m_pTag; /** pointer to the TAG */
     unsigned char m_tag_length; /** number of bytes encoding TAG - update to 4 */
     unsigned int m_tag_value; /** TAG's value*/
-    unsigned char* m_pLength; /** pointer to the LENGTH */
+    unsigned char *m_pLength; /** pointer to the LENGTH */
     unsigned char m_length_length; /** number of bytes encoding LENGTH - update to 4 */
     unsigned short m_length_value; /* LENGTH's value*/
-    unsigned char* m_pData; /** VALUE */
+    unsigned char *m_pData; /** VALUE */
 } tlv_parser_data_object;
 
 /**
@@ -54,8 +54,8 @@ typedef struct
  */
 typedef struct
 {
-    unsigned char* m_pStreamStart; /** */
-    unsigned char* m_pStreamCurrent; /** */
+    unsigned char *m_pStreamStart; /** */
+    unsigned char *m_pStreamCurrent; /** */
     unsigned int m_length; /** */
     tlv_parser_data_object m_pDataObject; /** */
 } tlv_parser_iterator;

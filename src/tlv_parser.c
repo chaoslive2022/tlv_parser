@@ -23,7 +23,7 @@ int parse_tlv()
     return 0;
 }
 
-int tlv_parser_create(const unsigned char* data, unsigned int length, tlv_parser_iterator* iterator)
+int tlv_parser_create(const unsigned char *data, unsigned int length, tlv_parser_iterator *iterator)
 {
     if(!iterator)
     {
@@ -36,13 +36,13 @@ int tlv_parser_create(const unsigned char* data, unsigned int length, tlv_parser
     memset(iterator,0x00,sizeof(tlv_parser_iterator));
 #endif
 
-    iterator->m_pStreamStart = data;
+    iterator->m_pStreamStart = (unsigned char *)data;
     iterator->m_length = length;
 
     return 0;
 }
 
-int tlv_parser_first(tlv_parser_iterator* iterator)
+int tlv_parser_first(tlv_parser_iterator *iterator)
 {
     if(!iterator)
     {
@@ -60,17 +60,17 @@ int tlv_parser_first(tlv_parser_iterator* iterator)
    return 0;
 }
 
-int tlv_parser_has_next(const tlv_parser_iterator* iterator)
+int tlv_parser_has_next(const tlv_parser_iterator *iterator)
 {
     if(!iterator)
     {
-        return 0; // if iterator not defined then processed like end reached
+        return 0; // if iterator not defined then process like end reached
     }
 
     return iterator->m_pStreamCurrent < (iterator->m_pStreamStart + iterator->m_length);
 }
 
-int tlv_parser_next(tlv_parser_iterator* iterator)
+int tlv_parser_next(tlv_parser_iterator *iterator)
 {
     if(!iterator)
     {
@@ -80,7 +80,7 @@ int tlv_parser_next(tlv_parser_iterator* iterator)
     return 0;    
 }
 
-int tlv_parser_current(tlv_parser_iterator* iterator)
+int tlv_parser_current(tlv_parser_iterator *iterator)
 {
     if(!iterator)
     {
