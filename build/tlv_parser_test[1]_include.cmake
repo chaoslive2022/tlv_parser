@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/Olivier/1-Workspaces/MyProjects/tlv_parser/build/tlv_parser_test[1]_tests.cmake")
+  include("C:/Users/Olivier/1-Workspaces/MyProjects/tlv_parser/build/tlv_parser_test[1]_tests.cmake")
+else()
+  add_test(tlv_parser_test_NOT_BUILT tlv_parser_test_NOT_BUILT)
+endif()
