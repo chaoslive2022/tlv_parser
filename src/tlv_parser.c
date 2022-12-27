@@ -9,11 +9,8 @@
  * 
  */
 
-#include "../../hal/src/hal.h"
-#include <string.h>
-
 #include "tlv_parser.h"
-
+#include <string.h>
 
 // Private
 uint16_t tlv_parser_parse_tlv(uint8_t *tlv, tlv_parser_data_object *data_object)
@@ -59,7 +56,7 @@ uint16_t tlv_parser_initialize(const uint8_t *data, uint16_t length, tlv_parser_
         return TLV_PARSER_INVALID_STREAM_LENGTH;
     }
 
-    hal_memset(iterator,0x00,sizeof(tlv_parser_iterator));
+    memset(iterator,0x00,sizeof(tlv_parser_iterator));
 
     iterator->m_stream_start = (uint8_t *)data;
     iterator->m_length = length;

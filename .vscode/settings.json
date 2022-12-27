@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "tlv_parser.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "tlv_parser_configuration.h": "c"
     }
 }

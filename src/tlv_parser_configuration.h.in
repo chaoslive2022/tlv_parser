@@ -1,0 +1,6 @@
+#define tlv_parser_VERSION_MAJOR @tlv_parser_VERSION_MAJOR@
+#define tlv_parser_VERSION_MINOR @tlv_parser_VERSION_MINOR@
+#define tlv_parser_VERSION_PATCH @tlv_parser_VERSION_PATCH@
+#define tlv_parser_VERSION_TWEAK @tlv_parser_VERSION_TWEAK@
+
+#cmakedefine USE_GTEST
