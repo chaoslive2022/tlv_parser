@@ -79,7 +79,7 @@ extern "C" {
  *
  */
 typedef struct {
-    const uint8_t* stream_start; /** */
+    uint8_t* stream_start; /** */
     uint16_t length; /** */
     uint8_t* stream_current; /** */
 } tlv_parser_iterator_t;

@@ -88,6 +88,7 @@ main(int argc, char **argv) {
     } else if (options.tlv_string) {
         if (!(strlen(argv[2]) % 2)) {
             printf("tlv string (%i): %s\n", strlen(argv[2]), argv[2]);
+            printf("echo tlv string (%i): ", strlen(argv[2])/2);
             for (i = 0; i < strlen(argv[2]); i+=2) {
                 printf("%.2X", byte_string_to_value(argv[2][i],argv[2][i+1]));
             }

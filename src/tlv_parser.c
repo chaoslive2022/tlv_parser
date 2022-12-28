@@ -37,7 +37,8 @@ parse_value(uint8_t byte) {
 
 uint16_t
 tlv_parser_parse_tlv(const tlv_parser_iterator_t* iterator) {
-    uint8_t *end = iterator->stream_start + iterator->length, *working = iterator->stream_current;
+    uint8_t* end = iterator->stream_start + iterator->length;
+    uint8_t* working = iterator->stream_current;
     tlv_parser_state_t next_state = tlv_parser_TAG;
     
     while (working < end) {
@@ -97,7 +98,7 @@ tlv_parser_initialize(const uint8_t* data, uint16_t length, tlv_parser_iterator_
 
     memset(iterator, 0x00, sizeof(tlv_parser_iterator_t));
 
-    iterator->stream_start = data;
+    iterator->stream_start = (uint8_t*)data;
     iterator->length = length;
 
     return TLV_PARSER_NO_ERROR;
@@ -136,7 +137,7 @@ tlv_parser_next(tlv_parser_iterator_t* iterator) {
 
     error = tlv_parser_catch_init_error(iterator);
     if (error) {
-        return error;
+        return 0;
     }
 
     /* To do */
